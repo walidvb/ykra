@@ -70,6 +70,8 @@ $ ->
 		$.get href, (data) ->
 			posts = $( '.img-container', $(data))
 			insertPosts posts
+			nextPage = $('.next-page', $(data))
+			$('.next-page').replaceWith nextPage
 		posts
 	insertPosts = (posts) ->
 		shuffleArray posts
