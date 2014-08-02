@@ -8,20 +8,17 @@ $ ->
 		self.elem = item
 		self.big = $this.attr('data-big')
 		self.small = $this.attr('data-small')
-		self.load = (size = 'big') ->
-			console.log self.loaded
-			src = if size == 'big' then self.big else self.small
+		self.load = () ->
+			src = self.big
 			img = new Image()
 			img.src = src
 			console.log 'Started fetching ' + src
 			img.onload = () ->
-				#console.log 'Fetched '+src
 				self.elem.css 'backgroundImage', "url('"+src+"')"
 				self.loaded = true
 			setTimeout () ->
 				do self.loadNext
 			, 2000
-		self.loaded = false
 		self.show = (callback = null) ->
 			timer = setTimeout () ->
 				do $this.show
@@ -35,11 +32,13 @@ $ ->
 		self.init = () ->
 			$this.click () ->
 				do nextSlide
+				$('body').removeClass 'info-open'
 		self.index = index
 		self.loadNext = () ->
 			nextIndex = if currentSlide+1 >= imgs.length then 0 else currentSlide+1
 			nextSlide = imgs[nextIndex]
 			do nextSlide.load unless nextSlide.loaded
+			if self.index is imgs.length-1 then do getPosts
 		self
 
 	nextSlide = () ->
@@ -48,19 +47,37 @@ $ ->
 		do imgs[currentSlide].show
 	init = () ->
 		all = shuffleArray($('.img-container'))
-		lastSlide = all[all.length]
-		all.each (index) ->
-			i = new myImage($(this), index)
-			#i.load('big')
-			i.init()
-			imgs.push i
+		addPosts all
+		window.onresize = () ->
+			do imgs[currentSlide].load
 		do imgs[0].load
 		do imgs[0].show
-	do init
+	
+
+	addPosts = (posts) ->
+		offset = imgs.length-1
+		posts.each (index) ->
+			i = new myImage($(this), index+offset)
+			i.init()
+			imgs.push i
+		imgs[offset+1].load()
 
 	$('.info-trigger').click () ->
-		$('.info').toggleClass 'open'
+		$('body').toggleClass 'info-open'
 
+	getPosts = (href) ->
+		posts
+		$.get href, (data) ->
+			posts = $( '.img-container', $(data))
+			insertPosts posts
+		posts
+	insertPosts = (posts) ->
+		shuffleArray posts
+		posts.each () ->
+			$('.images').append $(this)
+		addPosts(posts)
+
+	do init
 ###
 Randomize array element order in-place.
 Using Fisher-Yates shuffle algorithm.
