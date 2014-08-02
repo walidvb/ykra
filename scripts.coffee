@@ -1,5 +1,5 @@
 $ ->
-	imgs = []
+	window.imgs = []
 	currentSlide = 0
 	Image = (item) ->
 		$this = item
@@ -25,12 +25,12 @@ $ ->
 		do imgs[currentSlide].show
 	init = () ->
 		all = $ '.img-container'
-		all.each () ->
+		shuffleArray(all).each () ->
 			i = new Image($(this))
+			console.log i.big
 			i.load('big')
 			i.init()
 			imgs.push i
-		shuffleArray(imgs)
 	do init
 
 
@@ -40,7 +40,6 @@ Using Fisher-Yates shuffle algorithm.
 ###
 shuffleArray = (array) ->
   i = array.length - 1
-
   while i > 0
     j = Math.floor(Math.random() * (i + 1))
     temp = array[i]
