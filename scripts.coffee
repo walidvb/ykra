@@ -59,7 +59,7 @@ $ ->
 			imgs.push i
 		imgs[offset+1].load()
 
-	$('.info-trigger').bind 'hover click', () ->
+	$('.info-trigger').bind 'hover click touch', () ->
 		$('body').toggleClass 'info-open'
 
 	do init
