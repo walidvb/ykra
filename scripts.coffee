@@ -15,17 +15,17 @@ $ ->
 			console.log 'Started fetching ' + src
 			img.onload = () ->
 				self.elem.css 'backgroundImage', "url('"+src+"')"
-				self.loaded = true
-			setTimeout () ->
+				self.is_loaded = true
 				do self.loadNext
-			, 2000
 		self.show = (callback = null) ->
 			timer = setTimeout () ->
+				$('body').removeClass 'loading'
 				do $this.show
 			, 500
 			do self.loadNext
 			do callback unless callback is null
 		self.hide = (callback = null) ->
+			$('body').addClass 'loading'
 			do $this.hide
 			clearTimeout timer
 			do callback unless callback is null
@@ -37,8 +37,7 @@ $ ->
 		self.loadNext = () ->
 			nextIndex = if currentSlide+1 >= imgs.length then 0 else currentSlide+1
 			nextSlide = imgs[nextIndex]
-			do nextSlide.load unless nextSlide.loaded
-			if self.index is imgs.length-1 then do getPosts
+			do nextSlide.load unless nextSlide.is_loaded
 		self
 
 	nextSlide = () ->
@@ -48,8 +47,6 @@ $ ->
 	init = () ->
 		all = shuffleArray($('.img-container'))
 		addPosts all
-		window.onresize = () ->
-			do imgs[currentSlide].load
 		do imgs[0].load
 		do imgs[0].show
 	
@@ -62,22 +59,8 @@ $ ->
 			imgs.push i
 		imgs[offset+1].load()
 
-	$('.info-trigger').click () ->
+	$('.info-trigger').bind 'hover click', () ->
 		$('body').toggleClass 'info-open'
-
-	getPosts = (href) ->
-		posts
-		$.get href, (data) ->
-			posts = $( '.img-container', $(data))
-			insertPosts posts
-			nextPage = $('.next-page', $(data))
-			$('.next-page').replaceWith nextPage
-		posts
-	insertPosts = (posts) ->
-		shuffleArray posts
-		posts.each () ->
-			$('.images').append $(this)
-		addPosts(posts)
 
 	do init
 ###
