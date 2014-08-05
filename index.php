@@ -1,5 +1,5 @@
 <?php 
-$imgs = scandir("hiRes");
+$imgs = scandir("images/lowRes");
 unset($imgs[0]);
 unset($imgs[1]);
 
@@ -16,52 +16,68 @@ unset($imgs[1]);
 	<title>Searching for flamingos</title>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<meta content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimal-ui" name="viewport">
-  <link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles.css">
 	<script src="scripts.js"></script>
+
 </head>
 <body>
-
-		<div class="images">
-      <div class="loader"></div>
-      <?php foreach($imgs as $img): ?>
-					<div class="img-container" data-big="hiRes/<?php print $img; ?>"></div>
-      <?php endforeach; ?>
-		</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="0" width="0">
+  <defs>
+     <filter id="blur" x="0" y="0">
+       <feGaussianBlur stdDeviation="3" />
+     </filter>
+  </defs>
+</svg>   
+	<div class="images">
+		<div class="loader"></div>
+		<?php foreach($imgs as $img): ?>
+			<div class="img-container" data-big="images/lowRes/<?php print $img; ?>"></div>
+		<?php endforeach; ?>
+	</div>
 
 	<div class="info">
 		<div class="info-details">
+			<div class="ykra">
 				<div class="left">
-				Scénographie du Lieu central du festival de la Bâtie 2014
-				</div>
-				<div class="hidden-xs">
-				réalisée par
+						<p>Scénographie du Lieu central du festival de la Bâtie 2014</p>
+						<p class="hidden-xs">
+							réalisée par
+						</p>
 				</div>
 				<div class="right">
-					<span>YKRA </span>
-					<span>Youri Kravtchenko </span>
-					<span class="hidden-xs">Architecte EPFL-SIA </span>
-					<span class="hidden-xs">9, place des Augustins </span>
-					<span class="hidden-xs">1205 Genève </span>
-					<span class="hidden-xs"><a href="tel:+41787170899">078 717 08 99</a></span>
-					<span><a href="mailto:y@ykra.ch", target="_blank">y@ykra.ch</a></span>
+
+					<p>
+						<span>YKRA </span><br>
+						<span>Youri Kravtchenko </span><br>
+						<span class="hidden-xs">
+						<br>
+						<span>Architecte EPFL-SIA </span><br>
+						<span>9, place des Augustins </span><br>
+						<span>1205 Genève </span><br>
+						<span><a href="tel:+41787170899">078 717 08 99</a></span><br></span>
+						<span><a href="mailto:y@ykra.ch", target="_blank">y@ykra.ch</a></span>
+					</p>
 				</div>
-				<div class="credits">
+			</div>
+			<div class="credits">
+				<p>
 					<span class="type left">Photos:</span> <span class="name right">Maria Trofimova</span>
 					<br>
 					<span class="type left">Site:</span> <span class="name right">Walid van Boetzelaer</span>	
-				</div>
+				</p>
+			</div>
 		</div>
 		<div class="info-trigger"></div>
 	</div>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-51011384-2', 'bamfestival.be');
-      ga('send', 'pageview');
+		ga('create', 'UA-27024782-18', 'bamfestival.be');
+		ga('send', 'pageview');
 
-    </script>
+	</script>
 </body>
 </html>
