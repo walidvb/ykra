@@ -2,15 +2,17 @@
 $imgs = scandir("images/lowRes");
 unset($imgs[0]);
 unset($imgs[1]);
-
+shuffle($imgs);
+$fb = false;
+if(preg_match('/^FacebookExternalHit\/.*?/i', $_SERVER['HTTP_USER_AGENT'])){
+		$fb = true;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-
-	<meta name="text:Google Analytics ID" content="" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<title>Searching for flamingos</title>
@@ -31,7 +33,11 @@ unset($imgs[1]);
 	<div class="images">
 		<div class="loader"></div>
 		<?php foreach($imgs as $img): ?>
-			<div class="img-container" data-big="images/lowRes/<?php print $img; ?>"></div>
+			<div class="img-container" data-big="images/lowRes/<?php print $img; ?>">
+				<?php if($fb): ?>
+					<img src="images/lowRes/<?php print $img; ?>" alt="">
+				<?php endif; ?>
+			</div>
 		<?php endforeach; ?>
 	</div>
 
@@ -70,14 +76,14 @@ unset($imgs[1]);
 		<div class="info-trigger"></div>
 	</div>
 	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-		ga('create', 'UA-27024782-18', 'bamfestival.be');
-		ga('send', 'pageview');
+	  ga('create', 'UA-27024782-18', 'auto');
+	  ga('send', 'pageview');
 
-	</script>
+</script>
 </body>
 </html>
