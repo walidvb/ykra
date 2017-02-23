@@ -1,5 +1,7 @@
-<?php 
-$imgs = scandir("images/lowRes");
+<?php
+$imgs = array_filter(scandir('images'), function($item) {
+    return !is_dir('../pages/' . $item);
+});
 unset($imgs[0]);
 unset($imgs[1]);
 shuffle($imgs);
@@ -13,6 +15,9 @@ if(preg_match('/^FacebookExternalHit\/.*?/i', $_SERVER['HTTP_USER_AGENT'])){
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+
+	<meta property="og:site_name", content="YKRA.CH">
+
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<title>Searching for flamingos</title>
@@ -29,51 +34,54 @@ if(preg_match('/^FacebookExternalHit\/.*?/i', $_SERVER['HTTP_USER_AGENT'])){
        <feGaussianBlur stdDeviation="3" />
      </filter>
   </defs>
-</svg>   
+</svg>
 	<div class="images">
 		<div class="loader"></div>
 		<?php foreach($imgs as $img): ?>
-			<div class="img-container" data-big="images/lowRes/<?php print $img; ?>">
+			<div class="img-container" data-big="images/desktop/<?php print $img; ?>" data-small="images/mobile/<?php print $img; ?>">
 				<?php if($fb): ?>
-					<img src="images/lowRes/<?php print $img; ?>" alt="">
+					<img src="images/<?php print $img; ?>" alt="">
 				<?php endif; ?>
 			</div>
 		<?php endforeach; ?>
 	</div>
 
-	<div class="info">
-		<div class="info-details">
-			<div class="ykra">
-				<div class="left">
-						<p>Scénographie du Lieu central du festival de la Bâtie 2014</p>
-						<p class="hidden-xs">
-							réalisée par
-						</p>
-				</div>
-				<div class="right">
+	<div class="ui">
+		<div class="info">
+			<div class="info-details">
+				<div class="ykra">
+					<div class="left">
+							<p>Scénographie du Lieu central du festival de la Bâtie 2014</p>
+							<p class="hidden-xs">
+								réalisée par
+							</p>
+					</div>
+					<div class="right">
 
+						<p>
+							<span>YKRA </span><br>
+							<span>Youri Kravtchenko </span><br>
+							<span class="hidden-xs">
+							<br>
+							<span>Architecte EPFL-SIA </span><br>
+							<span>9, place des Augustins </span><br>
+							<span>1205 Genève </span><br>
+							<span><a href="tel:+41787170899">078 717 08 99</a></span><br></span>
+							<span><a href="mailto:y@ykra.ch", target="_blank">y@ykra.ch</a></span>
+						</p>
+					</div>
+				</div>
+				<div class="credits">
 					<p>
-						<span>YKRA </span><br>
-						<span>Youri Kravtchenko </span><br>
-						<span class="hidden-xs">
+						<span class="type left">Photos:</span> <span class="name right">Maria Trofimova</span>
 						<br>
-						<span>Architecte EPFL-SIA </span><br>
-						<span>9, place des Augustins </span><br>
-						<span>1205 Genève </span><br>
-						<span><a href="tel:+41787170899">078 717 08 99</a></span><br></span>
-						<span><a href="mailto:y@ykra.ch", target="_blank">y@ykra.ch</a></span>
+						<span class="type left">Site:</span> <span class="name right">Walid van Boetzelaer</span>
 					</p>
 				</div>
 			</div>
-			<div class="credits">
-				<p>
-					<span class="type left">Photos:</span> <span class="name right">Maria Trofimova</span>
-					<br>
-					<span class="type left">Site:</span> <span class="name right">Walid van Boetzelaer</span>	
-				</p>
-			</div>
+			<div class="info-trigger trigger"></div>
 		</div>
-		<div class="info-trigger"></div>
+		<a href="./portfolio.pdf" target="_blank" class="pdf-trigger trigger"></a>
 	</div>
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -81,9 +89,9 @@ if(preg_match('/^FacebookExternalHit\/.*?/i', $_SERVER['HTTP_USER_AGENT'])){
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-27024782-18', 'auto');
-	  ga('send', 'pageview');
+	  //ga('create', 'UA-27024782-18', 'auto');
+	  //ga('send', 'pageview');
 
-</script>
+	</script>
 </body>
 </html>

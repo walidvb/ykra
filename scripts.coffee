@@ -9,7 +9,7 @@ $ ->
 		self.big = $this.attr('data-big')
 		self.small = $this.attr('data-small')
 		self.load = () ->
-			src = self.big
+			src = if window.innerWidth > 768 then self.big else self.small
 			img = new Image()
 			img.src = src
 			console.log 'Started fetching ' + src
@@ -49,7 +49,7 @@ $ ->
 		addPosts all
 		do imgs[0].load
 		do imgs[0].show
-	
+
 
 	addPosts = (posts) ->
 		offset = imgs.length-1
