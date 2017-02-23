@@ -12,6 +12,8 @@ if ! [ -a desktop ]
 		echo "Folder desktop not found, creating it"
 		mkdir desktop
 fi
+
+i=0;
 ls | while read f ; do
 	if [ -f "$f" ]
 		then
@@ -20,10 +22,11 @@ ls | while read f ; do
 			mogrify -path "desktop" -filter Triangle -define filter:support=2 -thumbnail 1600 -unsharp 0.25x0.08+8.3+0.045 -dither None -posterize 136 -quality 82 -define jpeg:fancy-upsampling=off -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB "$FILENAME"
 
 			mogrify -path "mobile" -filter Triangle -define filter:support=2 -thumbnail 600 -unsharp 0.25x0.08+8.3+0.045 -dither None -posterize 136 -quality 82 -define jpeg:fancy-upsampling=off -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB "$FILENAME"
+			i=$((i+1))
 	else
 		echo "Skipping $f"
 	fi
 done
 
-echo "All images were resized to 1280"
+echo "$i images resized"
 exit
