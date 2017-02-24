@@ -1,5 +1,5 @@
 <?php
-$imgs = array_filter(scandir('images'), function($item) {
+$imgs = array_filter(scandir('./images'), function($item) {
   return @is_array(getimagesize('images/'.$item));
 });
 unset($imgs[0]);
@@ -36,11 +36,25 @@ if(preg_match('/^FacebookExternalHit\/.*?/i', $_SERVER['HTTP_USER_AGENT'])){
   $(document).ready(function(){
     console.log('Site by the walidvb');
     $('.prev, .next').on('click touch', goTo);
-    function goTo(e){
-      var page = $(this).hasClass('prev') ? $('.page:visible').prev() : $('.page:visible').next();
-      $('.page').hide();
-      page.show();
+    function goTo(e, dir){
+      var page = ($(this).hasClass('prev') || dir == -1) ? $('.page:visible').prev() : $('.page:visible').next();
+      if(page.length){
+        $('.page').hide();
+        page.show();
+      }
     }
+    $(document).on('keyup', function(e){
+      if(!$('info-details').is(':visible')){
+        switch(e.keyCode){
+          case 37:
+          goTo({}, -1);
+          return;
+          case 39:
+          goTo({}, 1);
+          return;
+        }
+      }
+    });
   });
   </script>
 </head>
