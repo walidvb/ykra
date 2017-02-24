@@ -51,6 +51,9 @@ if(preg_match('/^FacebookExternalHit\/.*?/i', $_SERVER['HTTP_USER_AGENT'])){
         <div class="section">
           <p>
             <h1>Anecdot</h1>
+          </p>
+          <p>Bureau d'architectes<br>Direction artistique </p>
+          <p>
             <span>Youri Kravtchenko</span><br>
             <span>Joseph Deane</span><br>
             <br>
