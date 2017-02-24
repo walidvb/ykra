@@ -32,31 +32,6 @@ if(preg_match('/^FacebookExternalHit\/.*?/i', $_SERVER['HTTP_USER_AGENT'])){
   <meta content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimal-ui" name="viewport">
   <link rel="stylesheet" href="styles.css">
   <script src="scripts.js"></script>
-  <script type="text/javascript">
-  $(document).ready(function(){
-    console.log('Site by the walidvb');
-    $('.prev, .next').on('click touch', goTo);
-    function goTo(e, dir){
-      var page = ($(this).hasClass('prev') || dir == -1) ? $('.page:visible').prev() : $('.page:visible').next();
-      if(page.length){
-        $('.page').hide();
-        page.show();
-      }
-    }
-    $(document).on('keyup', function(e){
-      if(!$('info-details').is(':visible')){
-        switch(e.keyCode){
-          case 37:
-          goTo({}, -1);
-          return;
-          case 39:
-          goTo({}, 1);
-          return;
-        }
-      }
-    });
-  });
-  </script>
 </head>
 <body>
   <div class="images">
@@ -74,22 +49,6 @@ if(preg_match('/^FacebookExternalHit\/.*?/i', $_SERVER['HTTP_USER_AGENT'])){
     <div class="info">
       <div class="info-details">
         <div class="section">
-          <div class="page">
-            <p>Anecdot est influencée par la narrativité et la théâtralité que les espaces peuvent communiquer. Nostalgique autant que pragmatique, Anecdot mélange les matières et les époques, combinant (voire contournant !) le minimalisme actuel avec des ambiances atmosphériques plus sophistiquées. En ce sens, Anecdot recherche constamment la cohérence dans l’irrationnel, le fonctionnel dans une bonne histoire.</p>
-            <p class="pager">1/3 <span class="next">></span></p>
-          </div>
-          <div class="page">
-            <p>L’équipe d’Anecdot est formé d’architectes, d’architectes d’intérieur ainsi que de menuisiers. Elle s’entoure très étroitement d’artisans locaux amoureux de leur métier.  Ensemble, ils signent des projets de constructions de bâtiment, de transformations, de décoration, de scénographie, de conceptualisation et fabrication de meubles et d’objets inédits.</p>
-            <p class="pager">2/3 <span class="prev"><</span> <span class="next">></span></p>
-          </div>
-          <div class="page">
-            <p>Anecdot est le fruit de la collaboration de deux architectes Youri Kravtchenko et Joseph Deane.  Youri est diplômé de l’École Polytechnique de Lausanne au sein de laquelle il a obtenu plusieurs distinctions. Il a réalisé de nombreux projets principalement en Suisse et en Russie. Lauréat de plusieurs prix, Joseph a fait ses études à la Royal College of Art à Londres. Depuis lors, il signe des projets en Grande-Bretagne et en Suisse</p>
-            <p class="pager">3/3 <span class="prev"><</span></p>
-          </div>
-
-        </div>
-        <div class="section">
-          <p class="hidden-landscape">--------------------------</p>
           <p>
             <h1>Anecdot</h1>
             <span>Youri Kravtchenko</span><br>
