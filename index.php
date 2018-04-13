@@ -15,6 +15,7 @@ if(preg_match('/^FacebookExternalHit\/.*?/i', $_SERVER['HTTP_USER_AGENT'])){
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="google-site-verification" content="DFl_XHMD1F3aRuSgAdSu2nYNfvSFFtHicn8Sa330q-M" />
 
   <meta property="og:site_name", content="Anecdot.ch">
   <meta property="og:image" content="./share.jpg"/>
